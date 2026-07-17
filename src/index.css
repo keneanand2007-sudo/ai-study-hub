@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+/* ================================
+   AI Study Hub — Design Tokens
+   Theme: Jarvis / HUD (Sci-Fi)
+   ================================ */
+
+:root {
+  /* Core Backgrounds (Dark - default) */
+  --color-background: #05060a;
+  --color-surface: #0d0f18;
+  --color-surface-hover: #12141f;
+
+  /* Neon Accents */
+  --color-primary: #00e5ff;
+  --color-primary-glow: rgba(0, 229, 255, 0.35);
+  --color-secondary: #7c3aed;
+  --color-secondary-glow: rgba(124, 58, 237, 0.35);
+
+  /* Semantic */
+  --color-success: #00ff9d;
+  --color-warning: #ffb800;
+  --color-danger: #ff3b5c;
+  --color-danger-glow: rgba(255, 59, 92, 0.35);
+  --color-info: #00b8ff;
+
+  /* Text */
+  --color-text-primary: #e6f1ff;
+  --color-text-secondary: #7d8aa3;
+  --color-disabled: #3a3f52;
+
+  /* Borders */
+  --color-border: #1e2230;
+  --color-border-glow: rgba(0, 229, 255, 0.4);
+
+  /* Spacing (4px grid) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Radius — sharper, geometric feel */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --motion-fast: 120ms;
+  --motion-normal: 200ms;
+  --motion-slow: 320ms;
+
+  /* Fonts */
+  --font-sans: 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Consolas', 'JetBrains Mono', ui-monospace, monospace;
+}
+
+[data-theme="dark"] {
+  --color-background: #05060a;
+  --color-surface: #0d0f18;
+  --color-surface-hover: #12141f;
+  --color-text-primary: #e6f1ff;
+  --color-text-secondary: #7d8aa3;
+  --color-border: #1e2230;
+  --color-disabled: #3a3f52;
+}
+
+[data-theme="light"] {
+  --color-background: #f4f6fb;
+  --color-surface: #ffffff;
+  --color-surface-hover: #eef1f8;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-border: #d7dce6;
+  --color-disabled: #cbd5e1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(0, 229, 255, 0.05), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.05), transparent 40%);
+  min-height: 100vh;
+  transition: background var(--motion-normal) ease, color var(--motion-normal) ease;
+}
+
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(0, 229, 255, 0.04), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.04), transparent 40%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Utility glow classes we'll reuse everywhere */
+.glow-border {
+  border: 1px solid var(--color-border);
+  transition: border-color var(--motion-normal) ease, box-shadow var(--motion-normal) ease;
+}
+
+.glow-border:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 12px var(--color-primary-glow);
+}
