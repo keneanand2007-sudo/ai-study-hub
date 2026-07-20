@@ -2,6 +2,7 @@ import FocusModeWrapper from '../../../shared/components/FocusModeWrapper.jsx'
 import ClockWidget from '../../../modules/widgets/Clock/ClockWidget.jsx'
 import RecentNotesWidget from '../../../modules/widgets/RecentNotes/RecentNotesWidget.jsx'
 import TodayTargetsWidget from '../../../modules/widgets/TodayTargets/TodayTargetsWidget.jsx'
+import StreakWidget from '../../../modules/widgets/RecentNotes/StreakWidget.jsx'
 
 function DashboardPage() {
   return (
@@ -14,6 +15,7 @@ function DashboardPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 'var(--space-5)' }}>
           <ClockWidget />
           <TodayTargetsWidget />
+          <StreakWidget />
           <RecentNotesWidget />
         </div>
       </div>

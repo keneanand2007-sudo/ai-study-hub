@@ -2,6 +2,8 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { LayoutDashboard, FileText, Calendar, Target, Link2, Settings, Focus } from 'lucide-react'
 import CommandPalette from '../../modules/search/components/CommandPalette.jsx'
 import { useFocusModeStore } from '../store/focusModeStore.js'
+import { useAuthStore } from '../../modules/auth/store/authStore.js'
+import Button from './Button.jsx'
 
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
@@ -15,7 +17,14 @@ const NAV_ITEMS = [
 function Sidebar() {
   const navigate = useNavigate()
   const location = useLocation()
+  const currentUser = useAuthStore(function (state) { return state.currentUser })
+  const logout = useAuthStore(function (state) { return state.logout })
   const toggleFocusMode = useFocusModeStore(function (state) { return state.toggleFocusMode })
+
+  const handleLogout = function () {
+    logout()
+    navigate('/login', { replace: true })
+  }
 
   return (
     <div style={{ width: '220px', height: '100vh', background: 'rgba(13, 15, 24, 0.8)', borderRight: '1px solid var(--color-border)', padding: 'var(--space-6) var(--space-4)', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', flexShrink: 0 }}>
@@ -73,7 +82,19 @@ function Sidebar() {
         Focus Mode
       </div>
 
-      <p style={{ marginTop: 'auto', fontSize: '10px', color: 'var(--color-text-secondary)', fontFamily: 'var(--font-mono)', paddingLeft: 'var(--space-2)' }}>
+      <div style={{ marginTop: 'auto', paddingTop: 'var(--space-4)', borderTop: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+        <div style={{ color: 'var(--color-text-secondary)', fontSize: '12px', paddingLeft: 'var(--space-2)' }}>
+          Signed in as
+        </div>
+        <div style={{ color: 'var(--color-text-primary)', fontWeight: 700, paddingLeft: 'var(--space-2)' }}>
+          {currentUser?.name || currentUser?.email || 'User'}
+        </div>
+        <Button variant="secondary" onClick={handleLogout} style={{ width: '100%' }}>
+          Logout
+        </Button>
+      </div>
+
+      <p style={{ marginTop: 'var(--space-4)', fontSize: '10px', color: 'var(--color-text-secondary)', fontFamily: 'var(--font-mono)', paddingLeft: 'var(--space-2)' }}>
         CTRL+K for commands
       </p>
     </div>
